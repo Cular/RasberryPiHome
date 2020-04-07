@@ -1,11 +1,9 @@
-﻿using HomeWatcher.TelegramCLI;
+﻿using HomeWatcher.Sensors;
+using HomeWatcher.TelegramCLI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HomeWatcher
 {
@@ -13,12 +11,8 @@ namespace HomeWatcher
     {
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.AddHostedService<TelegramHost>();
-            Configuration.Configure(services);
-        }
-
-        public static void ConfigurationApplication(HostBuilderContext context, IConfigurationBuilder configurationBuilder)
-        {
+            services.RegisterTelegram();
+            services.RegisterSensors();
         }
 
         public static void ConfigureLogging(HostBuilderContext context, ILoggingBuilder loggingBuilder)

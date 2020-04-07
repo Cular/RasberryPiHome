@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HomeWatcher.Sensors\HomeWatcher.Sensors.csproj" />
     <ProjectReference Include="..\HomeWatcher.TelegramCLI\HomeWatcher.TelegramCLI.csproj" />
   </ItemGroup>
 

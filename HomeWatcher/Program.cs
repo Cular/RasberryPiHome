@@ -11,8 +11,7 @@ namespace HomeWatcher
         {
             var builder = new HostBuilder()
                 .ConfigureLogging(Startup.ConfigureLogging)
-                .ConfigureServices(Startup.ConfigureServices)
-                .ConfigureAppConfiguration(Startup.ConfigurationApplication);
+                .ConfigureServices(Startup.ConfigureServices);
 
             await builder.RunConsoleAsync();
         }

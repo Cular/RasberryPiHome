@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWatcher", "HomeWatcher\HomeWatcher.csproj", "{7A041FB4-6159-4CDE-A72B-CE1286909FAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeWatcher", "HomeWatcher\HomeWatcher.csproj", "{7A041FB4-6159-4CDE-A72B-CE1286909FAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWatcher.TelegramCLI", "HomeWatcher.TelegramCLI\HomeWatcher.TelegramCLI.csproj", "{5E5CE1CF-1D81-4928-A9CE-F20B9E5EB5CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeWatcher.TelegramCLI", "HomeWatcher.TelegramCLI\HomeWatcher.TelegramCLI.csproj", "{5E5CE1CF-1D81-4928-A9CE-F20B9E5EB5CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeWatcher.Sensors", "HomeWatcher.Sensors\HomeWatcher.Sensors.csproj", "{C6118B94-433C-410C-A569-F01341FDEA2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5E5CE1CF-1D81-4928-A9CE-F20B9E5EB5CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E5CE1CF-1D81-4928-A9CE-F20B9E5EB5CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E5CE1CF-1D81-4928-A9CE-F20B9E5EB5CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6118B94-433C-410C-A569-F01341FDEA2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6118B94-433C-410C-A569-F01341FDEA2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6118B94-433C-410C-A569-F01341FDEA2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6118B94-433C-410C-A569-F01341FDEA2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
