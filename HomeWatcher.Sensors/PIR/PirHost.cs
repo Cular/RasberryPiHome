@@ -26,12 +26,13 @@ namespace HomeWatcher.Sensors.PIR
         {
             _logger.LogInformation("Started");
             _controller.OpenPin(PORT, PinMode.Input);
-            _controller.RegisterCallbackForPinValueChangedEvent(PORT, PinEventTypes.Falling, Handle);
+            _controller.RegisterCallbackForPinValueChangedEvent(PORT, PinEventTypes.Rising, Handle);
             return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            _controller.ClosePin(PORT);
             _logger.LogInformation("Stoped");
             return Task.CompletedTask;
         }
@@ -39,7 +40,7 @@ namespace HomeWatcher.Sensors.PIR
         private void Handle(object sender, PinValueChangedEventArgs pinValueChangedEventArgs)
         {
             //ToDo: send message
-            _logger.LogDebug($"Port[{pinValueChangedEventArgs.PinNumber}] is fall.");
+            _logger.LogDebug($"{DateTime.Now:HH:mm:ss} | Port[{pinValueChangedEventArgs.PinNumber}] is rising.");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace HomeWatcher
     {
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.RegisterTelegram();
+            //services.RegisterTelegram();
             services.RegisterSensors();
         }
 

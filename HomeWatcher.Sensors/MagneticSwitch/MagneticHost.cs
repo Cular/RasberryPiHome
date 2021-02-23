@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Device.Gpio;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,6 +30,7 @@ namespace HomeWatcher.Sensors.MagneticSwitch
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            _controller.ClosePin(PORT);
             _logger.LogInformation("Stoped");
             return Task.CompletedTask;
         }
@@ -39,7 +38,7 @@ namespace HomeWatcher.Sensors.MagneticSwitch
         private void Handle(object sender, PinValueChangedEventArgs pinValueChangedEventArgs)
         {
             //ToDo: send message
-            _logger.LogDebug($"Port[{pinValueChangedEventArgs.PinNumber}] is fall.");
+            _logger.LogDebug($"{DateTime.Now:HH:mm:ss} | Port[{pinValueChangedEventArgs.PinNumber}] is fall.");
         }
     }
 }

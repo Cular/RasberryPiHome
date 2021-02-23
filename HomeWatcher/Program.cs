@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 
 namespace HomeWatcher
@@ -12,7 +10,7 @@ namespace HomeWatcher
             var builder = new HostBuilder()
                 .ConfigureLogging(Startup.ConfigureLogging)
                 .ConfigureServices(Startup.ConfigureServices);
-
+            
             await builder.RunConsoleAsync();
         }
     }

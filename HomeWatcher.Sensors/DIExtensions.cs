@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Device.Gpio;
 using System.Text;
+using HomeWatcher.Sensors.PIR;
 
 namespace HomeWatcher.Sensors
 {
@@ -11,8 +12,9 @@ namespace HomeWatcher.Sensors
     {
         public static void RegisterSensors(this IServiceCollection services)
         {
-            services.AddTransient<GpioController>();
+            services.AddSingleton<GpioController>();
             services.AddHostedService<MagneticHost>();
+            services.AddHostedService<PirHost>();
         }
     }
 }
