@@ -13,7 +13,7 @@ namespace HomeWatcher.Sensors
         public static void RegisterSensors(this IServiceCollection services)
         {
             services.AddSingleton<GpioController>();
-            services.AddHostedService<MagneticHost>();
+            //services.AddHostedService<MagneticHost>();
             services.AddHostedService<PirHost>();
         }
     }

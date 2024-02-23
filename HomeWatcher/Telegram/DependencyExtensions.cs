@@ -1,11 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using Telegram.Bot;
 
-namespace HomeWatcher.TelegramCLI
+namespace HomeWatcher.Telegram
 {
     public static class Configuration
     {
@@ -18,6 +15,9 @@ namespace HomeWatcher.TelegramCLI
                 var accessToken = Environment.GetEnvironmentVariable(TELEGRAMTOKEN) ?? throw new ArgumentNullException(nameof(TELEGRAMTOKEN));
                 return new TelegramBotClient(accessToken);
             });
+
+            services.AddSingleton<IMessageSender, TelegramMessageSender>();
+            services.AddHostedService<TelegramMessageSender>(sp => sp.GetRequiredService<IMessageSender>() as TelegramMessageSender);
 
             return services;
         }

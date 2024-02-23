@@ -1,5 +1,3 @@
-﻿# dotnet publish HomeWatcher.csproj -r linux-arm --configuration Debug --framework netcoreapp3.1 --output /bin/publish/
-# pscp -r net5.0\ pi@192.168.1.44:/home/pi/test/program/
-# pscp -r linux-arm\ pi@192.168.1.44:/home/pi/test/program/
-# export DOTNET_ROOT=$HOME/test/dotnet-arm32
-# export PATH=$PATH:$HOME/test/dotnet-arm32
+﻿dotnet publish HomeWatcher.csproj -r linux-arm64 --configuration Release --output <project_path>\bin\publish\
+#first copy with whole dependencies
+pscp -pw <password> -r <project_path>\bin\publish\ pi@<ipaddress>:/home/pi/test/home_watcher/

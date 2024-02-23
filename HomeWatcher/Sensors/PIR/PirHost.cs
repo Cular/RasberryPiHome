@@ -3,22 +3,28 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Device.Gpio;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using HomeWatcher.Telegram;
 
 namespace HomeWatcher.Sensors.PIR
 {
-    public class PirHost : IHostedService
+    public sealed class PirHost : IHostedService
     {
         private const int PORT = 18;
 
         private readonly GpioController _controller;
+        private readonly IMessageSender _messageSender;
         private readonly ILogger<PirHost> _logger;
 
-        public PirHost(GpioController controller, ILogger<PirHost> logger)
+        private DateTime? _lastSendMessage;
+
+        public PirHost(GpioController controller, IMessageSender messageSender,  ILogger<PirHost> logger)
         {
             _controller = controller;
+            _messageSender = messageSender;
             _logger = logger;
         }
 
@@ -32,15 +38,23 @@ namespace HomeWatcher.Sensors.PIR
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            _controller.UnregisterCallbackForPinValueChangedEvent(PORT, Handle);
             _controller.ClosePin(PORT);
-            _logger.LogInformation("Stoped");
+            _logger.LogInformation("Stopped");
             return Task.CompletedTask;
         }
 
         private void Handle(object sender, PinValueChangedEventArgs pinValueChangedEventArgs)
         {
-            //ToDo: send message
-            _logger.LogDebug($"{DateTime.Now:HH:mm:ss} | Port[{pinValueChangedEventArgs.PinNumber}] is rising.");
+            if (IsReadyToSend())
+                return;
+            _logger.LogInformation($"{DateTime.Now:HH:mm:ss} | Port[{pinValueChangedEventArgs.PinNumber}] is {pinValueChangedEventArgs.ChangeType}.");
+            
+            Task.Run(() => _messageSender.SendAsync());
+            _lastSendMessage = DateTime.Now;
         }
+
+        private bool IsReadyToSend() =>
+            _lastSendMessage == null || DateTime.Now - _lastSendMessage.Value > TimeSpan.FromMinutes(5);
     }
 }
