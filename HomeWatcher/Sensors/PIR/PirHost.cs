@@ -21,7 +21,7 @@ namespace HomeWatcher.Sensors.PIR
 
         private DateTime? _lastSendMessage;
 
-        public PirHost(GpioController controller, IMessageSender messageSender,  ILogger<PirHost> logger)
+        public PirHost(GpioController controller, IMessageSender messageSender, ILogger<PirHost> logger)
         {
             _controller = controller;
             _messageSender = messageSender;
@@ -46,15 +46,19 @@ namespace HomeWatcher.Sensors.PIR
 
         private void Handle(object sender, PinValueChangedEventArgs pinValueChangedEventArgs)
         {
-            if (IsReadyToSend())
-                return;
-            _logger.LogInformation($"{DateTime.Now:HH:mm:ss} | Port[{pinValueChangedEventArgs.PinNumber}] is {pinValueChangedEventArgs.ChangeType}.");
+            _logger.LogInformation(
+                $"{DateTime.Now:HH:mm:ss} | Port[{pinValueChangedEventArgs.PinNumber}] is {pinValueChangedEventArgs.ChangeType}.");
             
+            if (!IsReadyToSend())
+            {
+                return;
+            }
+
             Task.Run(() => _messageSender.SendAsync());
             _lastSendMessage = DateTime.Now;
         }
 
         private bool IsReadyToSend() =>
-            _lastSendMessage == null || DateTime.Now - _lastSendMessage.Value > TimeSpan.FromMinutes(5);
+            _lastSendMessage == null || DateTime.Now - _lastSendMessage.Value > TimeSpan.FromMinutes(4);
     }
 }
