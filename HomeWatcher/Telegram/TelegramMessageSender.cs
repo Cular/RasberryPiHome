@@ -13,7 +13,7 @@ internal class TelegramMessageSender : IMessageSender, IHostedService
 {
     private readonly ITelegramBotClient _telegramBotClient;
     private readonly ILogger<TelegramMessageSender> _logger;
-    private readonly List<long> _chatIds = new(2);
+    private readonly HashSet<long> _chatIds = new(2);
 
     public TelegramMessageSender(ITelegramBotClient telegramBotClient, ILogger<TelegramMessageSender> logger)
     {

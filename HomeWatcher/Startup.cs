@@ -18,7 +18,7 @@ namespace HomeWatcher
         {
             loggingBuilder.ClearProviders();
             loggingBuilder.AddConsole();
-            loggingBuilder.SetMinimumLevel(LogLevel.Information);
+            loggingBuilder.SetMinimumLevel(LogLevel.Debug);
         }
     }
 }
